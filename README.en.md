@@ -1,6 +1,6 @@
 # AnyDoc RAG Preprocessor
 
-[![CI](https://github.com/akira-sato22/anydoc-rag-preprocessor/actions/workflows/ci.yml/badge.svg)](https://github.com/akira-sato22/anydoc-rag-preprocessor/actions/workflows/ci.yml)
+[![CI](https://github.com/akira-sato22/anydoc-RAG-preprocessor/actions/workflows/ci.yml/badge.svg)](https://github.com/akira-sato22/anydoc-RAG-preprocessor/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![IaC: AWS SAM](https://img.shields.io/badge/IaC-AWS%20SAM-FF9900.svg)](https://aws.amazon.com/serverless/sam/)

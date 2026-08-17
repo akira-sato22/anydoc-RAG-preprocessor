@@ -8,7 +8,7 @@ GitHub の非公開報告機能を使ってください。
 
 Use GitHub's private vulnerability reporting:
 
-**[Report a vulnerability](https://github.com/akira-sato22/anydoc-rag-preprocessor/security/advisories/new)**
+**[Report a vulnerability](https://github.com/akira-sato22/anydoc-RAG-preprocessor/security/advisories/new)**
 
 （リポジトリの **Security** タブ → **Report a vulnerability** からも辿れます。 / You can also reach it via the repository's **Security** tab → **Report a vulnerability**.）
 

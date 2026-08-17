@@ -16,8 +16,8 @@ AnyDoc RAG Preprocessor に興味を持っていただきありがとうござ�
 ### 開発環境のセットアップ
 
 ```bash
-git clone https://github.com/akira-sato22/anydoc-rag-preprocessor.git
-cd anydoc-rag-preprocessor
+git clone https://github.com/akira-sato22/anydoc-RAG-preprocessor.git
+cd anydoc-RAG-preprocessor
 
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
@@ -98,8 +98,8 @@ chore(ci): bump actions/checkout to v5
 ### Setting up
 
 ```bash
-git clone https://github.com/akira-sato22/anydoc-rag-preprocessor.git
-cd anydoc-rag-preprocessor
+git clone https://github.com/akira-sato22/anydoc-RAG-preprocessor.git
+cd anydoc-RAG-preprocessor
 
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate

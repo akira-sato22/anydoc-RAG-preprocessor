@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: 💬 質問・使い方の相談 / Questions and usage help
-    url: https://github.com/akira-sato22/anydoc-rag-preprocessor/discussions
+    url: https://github.com/akira-sato22/anydoc-RAG-preprocessor/discussions
     about: バグではない質問は Discussions へどうぞ / For questions that aren't bugs
   - name: 🔒 セキュリティ上の問題 / Security issue
-    url: https://github.com/akira-sato22/anydoc-rag-preprocessor/security/advisories/new
+    url: https://github.com/akira-sato22/anydoc-RAG-preprocessor/security/advisories/new
     about: 脆弱性は公開 Issue ではなく非公開で報告してください / Report vulnerabilities privately, not in public issues

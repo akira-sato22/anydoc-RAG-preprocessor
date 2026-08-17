@@ -33,5 +33,5 @@ All notable changes to this project are documented here, following [Keep a Chang
 - hypothesis によるプロパティテスト 16件 + ユニットテスト 8件
 - 詳細設計書（`DESIGN.md`）と仕様書（`.kiro/specs/`）
 
-[Unreleased]: https://github.com/akira-sato22/anydoc-rag-preprocessor/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/akira-sato22/anydoc-rag-preprocessor/releases/tag/v0.1.0
+[Unreleased]: https://github.com/akira-sato22/anydoc-RAG-preprocessor/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/akira-sato22/anydoc-RAG-preprocessor/releases/tag/v0.1.0
