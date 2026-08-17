@@ -1,0 +1,62 @@
+name: 🐛 バグ報告 / Bug report
+description: 想定と違う動きを見つけたときに / Report something that doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        報告ありがとうございます。日本語・英語どちらでも構いません。
+        Thanks for reporting. Japanese or English are both fine.
+
+        ⚠️ **機密情報を貼らないでください。** AWS アカウント ID、アクセスキー、実際の業務文書はマスク・除外してください。
+        ⚠️ **Do not paste sensitive material** — redact AWS account IDs, access keys, and real documents.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 何が起きたか / What happened
+      description: 期待した動きと、実際に起きたことを書いてください / Describe what you expected and what actually happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 再現手順 / Steps to reproduce
+      placeholder: |
+        1. `sam deploy` でデプロイ
+        2. `report.pptx` (約 30MB) を `documents/` にアップロード
+        3. Step Functions の実行が HandleUnsupported に落ちる
+    validations:
+      required: true
+
+  - type: input
+    id: file-type
+    attributes:
+      label: 入力ファイルの拡張子とおおよそのサイズ / Input file extension and approximate size
+      placeholder: ".pptx / 約 30MB"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: CloudWatch Logs / Step Functions の実行結果
+      description: 該当部分を貼ってください。バケット名・アカウント ID はマスクを / Paste the relevant excerpt with bucket names and account IDs redacted
+      render: text
+
+  - type: input
+    id: sam-version
+    attributes:
+      label: SAM CLI のバージョン / SAM CLI version
+      placeholder: "sam --version の出力"
+
+  - type: input
+    id: region
+    attributes:
+      label: リージョン / Region
+      placeholder: "ap-northeast-1"
+
+  - type: textarea
+    id: context
+    attributes:
+      label: その他 / Anything else
+      description: template.yaml を変更している場合はその内容など / e.g. modifications you made to template.yaml

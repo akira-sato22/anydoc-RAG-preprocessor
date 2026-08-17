@@ -1,0 +1,37 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /src/convert_document
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - dependencies
+
+  - package-ecosystem: pip
+    directory: /tests
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - dependencies
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(ci)"
+    labels:
+      - dependencies
+
+  - package-ecosystem: docker
+    directory: /src/convert_document
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - dependencies

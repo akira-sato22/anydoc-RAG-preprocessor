@@ -1,0 +1,36 @@
+{
+  "Comment": "AnyDoc RAG Preprocessor - Document conversion state machine",
+  "StartAt": "ConvertDocument",
+  "States": {
+    "ConvertDocument": {
+      "Type": "Task",
+      "Resource": "${ConvertDocumentFunctionArn}",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed", "Lambda.ServiceException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "HandleUnsupported"
+        }
+      ],
+      "Next": "Succeed"
+    },
+    "HandleUnsupported": {
+      "Type": "Pass",
+      "Result": {
+        "status": "failed",
+        "handled": true
+      },
+      "Next": "Succeed"
+    },
+    "Succeed": {
+      "Type": "Succeed"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+# SAM CLI Configuration
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
+
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "anydoc-rag-preprocessor"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM CAPABILITY_AUTO_EXPAND"
+resolve_s3 = true
+parameter_overrides = "Environment=\"dev\" Project=\"anydoc-rag\""
+# Replace <AWS_ACCOUNT_ID> with your own 12-digit AWS account ID before deploying.
+image_repositories = ["ConvertDocumentFunction=<AWS_ACCOUNT_ID>.dkr.ecr.ap-northeast-1.amazonaws.com/anydoc-rag-preprocessor/convert-document"]
+s3_prefix = "anydoc-rag-preprocessor"
+
+[default.build.parameters]
+cached = true
+parallel = true
+
+[default.global.parameters]
+region = "ap-northeast-1"

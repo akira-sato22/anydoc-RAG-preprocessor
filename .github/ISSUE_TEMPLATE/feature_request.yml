@@ -1,0 +1,42 @@
+name: 💡 機能提案 / Feature request
+description: あったら嬉しい機能・改善の提案 / Suggest an idea or improvement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提案ありがとうございます。日本語・英語どちらでも構いません。
+        Thanks for the suggestion. Japanese or English are both fine.
+
+        なお、チャンク分割・Embedding・ベクトル DB 登録はこのパイプラインのスコープ外です（README 参照）。
+        Note that chunking, embedding, and vector-store ingestion are out of scope for this pipeline (see the README).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 解決したい課題 / The problem
+      description: どういう場面で困っているかを書いてください。解決策より先に課題を / Describe the situation you're stuck in — the problem before the solution
+      placeholder: "大量のファイルを投入すると Step Functions の課金が無視できなくなる"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 考えている解決策 / Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 検討した代替案 / Alternatives considered
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: 実装に協力できますか / Would you be willing to work on this?
+      options:
+        - 実装して PR を送りたい / I'd like to send a PR
+        - 相談しながらなら / Maybe, with guidance
+        - 提案のみ / Just suggesting

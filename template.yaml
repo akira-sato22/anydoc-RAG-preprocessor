@@ -1,0 +1,134 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AnyDoc RAG Preprocessor - Document conversion pipeline for RAG
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+    Description: Deployment environment name
+
+  Project:
+    Type: String
+    Default: anydoc-rag
+    Description: Project name for tagging
+
+Globals:
+  Function:
+    Tags:
+      Environment: !Ref Environment
+      Project: !Ref Project
+
+Resources:
+  InputBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${AWS::StackName}-input'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      NotificationConfiguration:
+        EventBridgeConfiguration:
+          EventBridgeEnabled: true
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Project
+          Value: !Ref Project
+
+  OutputBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${AWS::StackName}-output'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Project
+          Value: !Ref Project
+
+  ConvertDocumentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      MemorySize: 512
+      Timeout: 300
+      Environment:
+        Variables:
+          OUTPUT_BUCKET_NAME: !Ref OutputBucket
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref InputBucket
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:PutObject
+              Resource: !Sub '${OutputBucket.Arn}/*'
+      Tags:
+        Environment: !Ref Environment
+        Project: !Ref Project
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./src/convert_document
+      DockerTag: latest
+
+  DocumentConvertStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Type: STANDARD
+      DefinitionUri: statemachine/convert.asl.json
+      DefinitionSubstitutions:
+        ConvertDocumentFunctionArn: !GetAtt ConvertDocumentFunction.Arn
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref ConvertDocumentFunction
+      Events:
+        S3ObjectCreated:
+          Type: EventBridgeRule
+          Properties:
+            Pattern:
+              source:
+                - aws.s3
+              detail-type:
+                - Object Created
+              detail:
+                bucket:
+                  name:
+                    - !Ref InputBucket
+      Tags:
+        Environment: !Ref Environment
+        Project: !Ref Project
+
+Outputs:
+  InputBucketName:
+    Description: Name of the input S3 bucket
+    Value: !Ref InputBucket
+
+  OutputBucketName:
+    Description: Name of the output S3 bucket
+    Value: !Ref OutputBucket
+
+  InputBucketArn:
+    Description: ARN of the input S3 bucket
+    Value: !GetAtt InputBucket.Arn
+
+  OutputBucketArn:
+    Description: ARN of the output S3 bucket
+    Value: !GetAtt OutputBucket.Arn
+
+  ConvertDocumentFunctionArn:
+    Description: ARN of the ConvertDocument Lambda function
+    Value: !GetAtt ConvertDocumentFunction.Arn
+
+  DocumentConvertStateMachineArn:
+    Description: ARN of the document conversion Step Functions state machine
+    Value: !Ref DocumentConvertStateMachine
