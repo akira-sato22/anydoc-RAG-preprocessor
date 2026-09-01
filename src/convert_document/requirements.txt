@@ -1,1 +1,1 @@
-firecrawl-anydoc==0.1.9
+firecrawl-anydoc==0.2.4
